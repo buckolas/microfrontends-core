@@ -33,3 +33,4 @@ Load each microfrontend via browser web request, versus built by Webpack and pac
 
 Web Elements
 Single SPA
+SystemJS
