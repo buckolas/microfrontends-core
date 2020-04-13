@@ -13,6 +13,7 @@
     {
       "imports": {
         "capability1": "http://localhost:4201/main.js",
+        "capability2": "http://localhost:4202/main.js",
         "single-spa": "https://cdnjs.cloudflare.com/ajax/libs/single-spa/4.3.5/system/single-spa.min.js"
       }
     }
@@ -43,6 +44,16 @@
         },
         function (location){
           return location.pathname.startsWith('/capability1');
+        }
+      );
+
+      singleSpa.registerApplication(
+        'capability2',
+        function() {
+          return System.import('capability2');
+        },
+        function (location){
+          return location.pathname.startsWith('/capability2');
         }
       );
 
