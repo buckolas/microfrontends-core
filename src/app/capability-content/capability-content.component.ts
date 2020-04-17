@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CapabilityContentService } from './capability-content.service';
 
 @Component({
   selector: 'app-capability-content',
@@ -8,22 +9,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CapabilityContentComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) {
-
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private contentService: CapabilityContentService
+  ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      console.log(data)
-      // Load the app
-      const script = document.createElement('script');
-      script.src = data.url;
-      document.body.appendChild(script);
+      // TODO this is quick and dirty. instead, convert the following to a promise or use async/await
 
-      // Create the custom element
-      const element = document.createElement(data.element);
-      const content = document.getElementById('content');
-      content.appendChild(element);
+      // Load the app
+      this.contentService.load(data.url);
+
+      setTimeout(() => {
+        // Create the custom element
+        const element = document.createElement(data.element);
+        const content = document.getElementById('content');
+        content.innerHTML = '';
+        content.appendChild(element);
+      }, 2000);
     });
   }
 
