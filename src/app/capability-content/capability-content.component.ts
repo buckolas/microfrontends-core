@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CapabilityContentService } from './capability-content.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-capability-content',
@@ -24,6 +25,7 @@ export class CapabilityContentComponent implements OnInit {
       setTimeout(() => {
         // Create the custom element
         const element = document.createElement(data.element);
+        element.setAttribute('parentapp', environment.application);
         const content = document.getElementById('content');
         content.innerHTML = '';
         content.appendChild(element);
